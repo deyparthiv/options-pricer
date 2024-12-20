@@ -1,8 +1,11 @@
 import datetime
 from abc import ABC,abstractmethod
 from pricing_models import PriceCalculator
+from assets import Asset
 
 class Option(ABC):
+    @abstractmethod
+    def get_asset(self) -> Asset: pass
     @abstractmethod
     def get_strike_price(self) -> float: pass
     @abstractmethod
