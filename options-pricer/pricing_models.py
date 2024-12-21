@@ -17,9 +17,19 @@ class BlackScholesPricingModel(PricingModel):
             return self.getPutPrice(option)
     
     def getCallPrice(self, option: EuropeanOption) -> float:
-            
-        d1 = (np.log(option.get_strike_price() / option.strike_price) + (option.r + 0.5 * option.sigma ** 2) * option.T) / (option.sigma * np.sqrt(option.T))
-        C = norm()
+        #varibles for the black scholes formula
+        spot_price = option.get_asset().get_spot_price()
+        risk_free_rate = option.get_asset().get_interest_rate()
+        volatiliy = option.get_asset().get_volatility() 
+        time_to_maturity = option.get_time_to_maturity() #in years
+        strike_price = option.get_strike_price()
+       
+        d1 = (np.log(spot_price / strike_price) + (risk_free_rate + 0.5 * volatiliy ** 2) * time_to_maturity) / (volatiliy* np.sqrt(time_to_maturity))
+        d2 = d1 - volatiliy * np.sqrt(time_to_maturity)
+        
+        C = norm(d1) * spot_price - norm(d2) * strike_price * np.exp(-risk_free_rate * time_to_maturity)
+        return C
+    
     def getPutPrice(self, option: EuropeanOption) -> float:
         pass
     
