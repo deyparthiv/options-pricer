@@ -1,4 +1,6 @@
 from abc import ABC,abstractmethod
+
+import numpy as np
 from options import Option, EuropeanOption
 from scipy.stats import norm
 
@@ -13,8 +15,11 @@ class BlackScholesPricingModel(PricingModel):
             return self.getCallPrice(option)
         else:
             return self.getPutPrice(option)
+    
     def getCallPrice(self, option: EuropeanOption) -> float:
-        C = 
+            
+        d1 = (np.log(option.get_strike_price() / option.strike_price) + (option.r + 0.5 * option.sigma ** 2) * option.T) / (option.sigma * np.sqrt(option.T))
+        C = norm()
     def getPutPrice(self, option: EuropeanOption) -> float:
         pass
     

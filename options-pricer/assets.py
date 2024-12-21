@@ -1,21 +1,21 @@
 from abc import ABC, abstractmethod
+import api_connection
 
 class Asset(ABC):
     @abstractmethod
-    def get_price(self) -> float: pass
+    def get_spot_price(self) -> float: pass
     @abstractmethod
     def get_volatility(self) -> float: pass
     @abstractmethod
     def get_interest_rate(self) -> float: pass
 
 class Stock(Asset):
-    def __init__(self, price: float, volatility: float, interest_rate: float):
-        self.price = price
-        self.volatility = volatility
-        self.interest_rate = interest_rate
-    def get_price(self) -> float:
-        return self.price
+    def __init__(self, symbol: str):
+        self.symbol = symbol
+        
+    def get_spot_price(self) -> float:
+        return api_connection.get_spotprice_of_stock(self.symbol)
     def get_volatility(self) -> float:
-        return self.volatility
+        pass
     def get_interest_rate(self) -> float:
-        return self.interest_rate
+        return api_connection.get_risk_free_interest_rate()
