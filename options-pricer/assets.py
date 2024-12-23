@@ -13,12 +13,18 @@ class Asset(ABC):
 
 # TO DO : add dividend yield
 class Stock(Asset):
-    def __init__(self, symbol: str):
-        self.symbol = symbol
-        
-    def get_spot_price(self) -> float:
+    def __init__(self, symbol: str, spot_price: float, volatility: float, interest_rate: float):
+        self.__symbol = symbol
+        self.__spot_price = spot_price
+        self.__volatility = volatility
+        self.__interest_rate = interest_rate
+    
+    def get_updated_spot_price(self) -> float:
         return api_connection.get_spotprice_of_stock(self.symbol)
-    def get_volatility(self) -> float:
+    def get_updated_volatility(self) -> float:
         return volatility_calculators.SimpleVolatilityCalculator().calculate_volatility(self)
-    def get_interest_rate(self) -> float:
+    def get_updated_interest_rate(self) -> float:
         return api_connection.get_risk_free_interest_rate()
+    def get_spot_price(self) -> float: return self.__spot_price
+    def get_volatility(self) -> float: return self.__volatility
+    def get_interest_rate(self) -> float: return self.__interest_rate
