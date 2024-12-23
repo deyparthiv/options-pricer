@@ -5,6 +5,8 @@ import volatility_calculators
 
 class Asset(ABC):
     @abstractmethod
+    def get_symbol(self) -> str: pass
+    @abstractmethod
     def get_spot_price(self) -> float: pass
     @abstractmethod
     def get_volatility(self) -> float: pass
@@ -18,7 +20,7 @@ class Stock(Asset):
         self.__spot_price = spot_price
         self.__volatility = volatility
         self.__interest_rate = interest_rate
-    
+    def get_symbol(self) -> str: return self.__symbol
     def get_updated_spot_price(self) -> float:
         return api_connection.get_spotprice_of_stock(self.symbol)
     def get_updated_volatility(self) -> float:
