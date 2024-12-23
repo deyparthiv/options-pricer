@@ -25,7 +25,7 @@ def get_historical_price_of_stock(symbol:str) -> list:
         historial_prices.append(value['close'])
     print("Succesfully fetched historical price for",symbol)
     return historial_prices
-
+"""returns the spot price of a stock"""
 def get_spotprice_of_stock(symbol:str) -> float:
     url = f"https://financialmodelingprep.com/api/v3/quote-short/{symbol}?apikey={financial_modelling_prep_api_key}"
     response = requests.get(url)
@@ -34,4 +34,12 @@ def get_spotprice_of_stock(symbol:str) -> float:
     value = response.json()
     print("Succesfully fetched spot price for",symbol)
     return value[0]['price']
-    
+"""returns the interest rate right now"""
+def get_risk_free_interest_rate() -> float:
+    url = f"https://financialmodelingprep.com/api/v3/rates?apikey={financial_modelling_prep_api_key}"
+    response = requests.get(url)
+    if response.status_code != 200:
+        raise Exception(f"Error fetching interest rate")
+    value = response.json()
+    print("Succesfully fetched interest rate")
+    return value['riskFreeRate']
