@@ -13,7 +13,7 @@ class SimpleVolatilityCalculator(VolatilityCalculator):
         Args:
             asset (Asset): the asset whose volatility is to be calculated
         Returns: float: the standard derivation of the historical prices of the stock"""
-        historical_prices = api_connection.get_historical_price_of_stock(asset.symbol)
+        historical_prices = api_connection.get_historical_prices_of_stock(asset.symbol)
         volalitity = np.std(historical_prices)
         return volalitity
     
