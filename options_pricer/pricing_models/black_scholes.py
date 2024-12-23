@@ -1,9 +1,8 @@
-from pricing_models import PricingModel
-from options import EuropeanOption
+from options_pricer.options.option import EuropeanOption
 import numpy as np
 from scipy.stats import norm
 
-class BlackScholesPricingModel(PricingModel):
+class BlackScholesPricingModel:
     def getPrice(self, option: EuropeanOption) -> float:
         if option.is_call:
             return self.getCallPrice(option)
@@ -21,7 +20,7 @@ class BlackScholesPricingModel(PricingModel):
         d1 = (np.log(spot_price / strike_price) + (risk_free_rate + 0.5 * volatiliy ** 2) * time_to_maturity) / (volatiliy* np.sqrt(time_to_maturity))
         d2 = d1 - volatiliy * np.sqrt(time_to_maturity)
         
-        C = norm(d1) * spot_price - norm(d2) * strike_price * np.exp(-risk_free_rate * time_to_maturity)
+        C = norm.cdf(d1) * spot_price - norm.cdf(d2) * strike_price * np.exp(-1*risk_free_rate * time_to_maturity)
         return C
     
     def getPutPrice(self, option: EuropeanOption) -> float:
@@ -35,5 +34,5 @@ class BlackScholesPricingModel(PricingModel):
         d1 = (np.log(spot_price / strike_price) + (risk_free_rate + 0.5 * volatiliy ** 2) * time_to_maturity) / (volatiliy* np.sqrt(time_to_maturity))
         d2 = d1 - volatiliy * np.sqrt(time_to_maturity)
         
-        P = strike_price * np.exp(-risk_free_rate * time_to_maturity) * norm(-d2) - spot_price * norm(-d1)
+        P = strike_price * np.exp(-risk_free_rate * time_to_maturity) * norm.cdf(-d2) - spot_price * norm.cdf(-d1)
         return P
