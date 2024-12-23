@@ -1,6 +1,6 @@
 import requests
 import os 
-from dotenv import load_dotenv, dotenv_values
+from dotenv import load_dotenv
 
 load_dotenv()
 financial_modelling_prep_api_key = os.getenv("FINANCIAL_MODELLING_PREP_API_KEY")
@@ -13,7 +13,7 @@ financial_modelling_prep_api_key = os.getenv("FINANCIAL_MODELLING_PREP_API_KEY")
     Raises:
         Exception: error fetching data
 """
-def get_historical_price_of_stock(symbol:str) -> list:
+def get_historical_prices_of_stock(symbol:str) -> list:
     url = f"https://financialmodelingprep.com/api/v3/historical-price-full/{symbol}?apikey={financial_modelling_prep_api_key}"
     response = requests.get(url)
     if response.status_code != 200:

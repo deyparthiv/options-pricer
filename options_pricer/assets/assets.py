@@ -13,7 +13,6 @@ class Asset(ABC):
     @abstractmethod
     def get_interest_rate(self) -> float: pass
 
-# TO DO : add dividend yield
 class Stock(Asset):
     def __init__(self, symbol: str, spot_price: float, volatility: float, interest_rate: float):
         self.__symbol = symbol
