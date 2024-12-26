@@ -46,5 +46,4 @@ def get_spotprice_of_stock(symbol:str) -> float:
     print("Succesfully fetched spot price for",symbol)
     return value[0]['price']
 """returns the interest rate right now"""
-def get_risk_free_interest_rate() -> float:
-    return 0.0452
+
