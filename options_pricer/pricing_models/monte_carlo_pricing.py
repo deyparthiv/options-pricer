@@ -1,6 +1,5 @@
-from pricing_models import PricingModel
-from options import Option
+from options_pricer.options.option import Option
 
-class MonteCarloPricingModel(PricingModel):
+class MonteCarloPricingModel():
     def getPrice(self, option: Option) -> float:
-        pass
+        raise NotImplementedError("Monte Carlo pricing is not yet implemented")
