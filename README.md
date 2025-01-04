@@ -8,7 +8,7 @@ The goal of this project is to implement various options pricing strategies.
   - Package: options
       - Modules: option
   - Package: pricing_models
-      - Modules: black_scholes, binomial_pricing (still to implement), monte_carlo_pricing (still to implement)
+      - Modules: black_scholes, binomial_pricing (still to implement for put options, implemented for call options), monte_carlo_pricing (still to implement)
   - Package: volatility_calculators
       - Modules: ...
   - Module: api_connection
