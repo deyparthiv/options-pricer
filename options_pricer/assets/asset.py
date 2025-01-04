@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 
 class Asset(ABC):
+    """A class representing an asset."""
     @abstractmethod
     def get_symbol(self) -> str: pass
     @abstractmethod

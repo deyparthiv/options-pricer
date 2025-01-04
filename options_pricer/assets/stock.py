@@ -1,7 +1,8 @@
-from options_pricer.assets.asset import Asset
 import datetime
+from options_pricer.assets.asset import Asset
 
-class Stock(Asset): #to encode the information about a stock
+class Stock(Asset):
+    """A class representing a stock."""
     def __init__(self, symbol: str, spot_price: float, volatility: float, interest_rate: float):
         self.__symbol = symbol
         self.__spot_price = spot_price

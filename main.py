@@ -3,12 +3,12 @@ from options_pricer.options.option import EuropeanOption
 import options_pricer.api_connection as api
 from datetime import date
 from options_pricer.pricing_models.black_scholes import BlackScholesPricingModel
-import options_pricer.volatility_calculators.simple_volatility as simple_volatility
+import options_pricer.volatility_calculators.historical_volatility as historical_volatility
 import options_pricer.risk_free_interest_calculator as rfi_calculator
 
 symbol = "AAPL"
 spot_price = api.get_spotprice_of_stock(symbol)
-volatility_calculator = simple_volatility.SimpleVolatilityCalculator()
+volatility_calculator = historical_volatility.HistoricalVolatilityCalculator()
 volatility = volatility_calculator.calculate_volatility_symbol(symbol)
 risk_free_rate = rfi_calculator.get_risk_free_interest_rate()
 maturity_date = date.fromisoformat("2027-12-22")
