@@ -5,6 +5,7 @@ from datetime import date
 from options_pricer.pricing_models.black_scholes import BlackScholesPricingModel
 import options_pricer.volatility_calculators.historical_volatility as historical_volatility
 import options_pricer.risk_free_interest_calculator as rfi_calculator
+from options_pricer.pricing_models.binomial_pricing import BinomialPricingModel
 
 symbol = "AAPL"
 spot_price = api.get_spotprice_of_stock(symbol)
@@ -28,5 +29,6 @@ for i in range(-50,51,10):
     price = black_schools_model.getPrice(option1)
     print("Strike price:",spot_price+i,"price:",price)
 
-
-
+bnp = BinomialPricingModel()
+price = bnp.get_price_european(option1,300)
+print("At Strike price: ",option1.get_strike_price(),"Binomial price:",price)
